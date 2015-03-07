@@ -7,3 +7,6 @@ class HardwareInterface:
 
     def send_packet(self, frame_id, packet, dest, ack=1):
         pass
+    
+    def check_channel(self):
+        pass

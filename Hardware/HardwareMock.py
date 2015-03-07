@@ -1,9 +1,12 @@
+import multiprocessing
 from Hardware.HardwareInterface import HardwareInterface
 
 __author__ = 'Malte-Christian'
 
 
 class HardwareMock(HardwareInterface):
+    channel = multiprocessing.Queue()
+
     def __init__(self, port):
         self._port = port
         self.node = None
@@ -12,7 +15,7 @@ class HardwareMock(HardwareInterface):
         self.node = node
 
     def send_packet(self, frame_id, packet, dest, ack=1):
-        pass
+        HardwareMock.channel.put(packet)
 
     def run(self):
         pass

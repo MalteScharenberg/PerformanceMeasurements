@@ -11,7 +11,6 @@ class NodeClass(multiprocessing.Process):
         super(NodeClass, self).__init__()
         NodeClass.counter += 1
         self.id = NodeClass.counter
-        print self.__class__
         self._behaviors = []
         self._log_data_queue = log_data_queue
 

@@ -6,6 +6,9 @@ import sys
 from Node.NodeClass import NodeClass
 from Evaluation.Evaluator import Evaluator
 from Helper.Printer import Printer
+from Hardware.HardwareMock import HardwareMock
+from Node.Source import Source
+from Node.Sink import Sink
 
 
 __author__ = 'Malte-Christian'

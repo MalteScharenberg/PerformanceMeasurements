@@ -35,7 +35,7 @@ class Source(NodeBehaviorInterface):
         self.log_id += 1
         header = self.encode_sender_information(self.node.get_id(), self.log_id)
         data = header + self.generate_data(self.payload - len(header))
-        frame_id = self.get_frame_id()
+        frame_id = self.get_frame_id(self.log_id)
         send_time = time.time()
         self.node.send_packet(frame_id, data, self.dest, self.ack)
         self.node.set_log_data(self.node.get_id(), self.log_id, {'send_time': send_time})

@@ -19,7 +19,7 @@ class NodeBehaviorInterface:
         raise NotImplementedError("Should have implemented this")
 
     def encode_sender_information(self, node_id, log_id):
-        return node_id + ',' + log_id + ','
+        return str(node_id) + ',' + str(log_id) + ','
 
     def decode_sender_information(self, data):
         result = str.split(',', data)

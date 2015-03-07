@@ -3,6 +3,7 @@
 * Python 2.7
 * XBee Python (global)
 * PySerial (global)
+
 ## Configuration
 Make your settings inside `config.json`:
 ```json

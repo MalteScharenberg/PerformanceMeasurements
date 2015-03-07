@@ -1,4 +1,4 @@
-from performanceMeasurement.Evaluation import EvaluatorBehaviorInterface
+from Evaluation import EvaluatorBehaviorInterface
 
 __author__ = 'Malte-Christian'
 

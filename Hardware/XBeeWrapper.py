@@ -2,7 +2,7 @@ import serial
 from xbee import XBee
 from xbee.helpers.dispatch import Dispatch
 
-from performanceMeasurement.Hardware import HardwareInterface
+from Hardware import HardwareInterface
 
 
 __author__ = 'Malte-Christian'

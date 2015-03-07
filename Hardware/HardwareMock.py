@@ -1,4 +1,4 @@
-from performanceMeasurement.Hardware.HardwareInterface import HardwareInterface
+from Hardware.HardwareInterface import HardwareInterface
 
 __author__ = 'Malte-Christian'
 

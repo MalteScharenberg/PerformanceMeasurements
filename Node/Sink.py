@@ -1,7 +1,5 @@
-import random
-import string
 
-from performanceMeasurement.Node.NodeBehaviorInterface import NodeBehaviorInterface
+from Node.NodeBehaviorInterface import NodeBehaviorInterface
 
 
 __author__ = 'Malte-Christian'

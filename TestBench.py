@@ -3,9 +3,9 @@ import time
 import json
 import sys
 
-from performanceMeasurement.Node.NodeClass import NodeClass
-from performanceMeasurement.Evaluation import Evaluator
-from performanceMeasurement.Helper import Printer
+from Node.NodeClass import NodeClass
+from Evaluation.Evaluator import Evaluator
+from Helper.Printer import Printer
 
 
 __author__ = 'Malte-Christian'

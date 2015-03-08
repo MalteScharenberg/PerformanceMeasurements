@@ -1,4 +1,4 @@
-from Evaluation import EvaluatorBehaviorInterface
+from Evaluation.EvaluatorBehaviorInterface import EvaluatorBehaviorInterface
 
 __author__ = 'Malte-Christian'
 
@@ -8,4 +8,4 @@ class Throughput(EvaluatorBehaviorInterface):
         pass
 
     def analyse(self, data, short):
-        pass
+        print data

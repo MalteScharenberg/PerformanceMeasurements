@@ -22,5 +22,5 @@ class NodeBehaviorInterface:
         return str(node_id) + ',' + str(log_id) + ','
 
     def decode_sender_information(self, data):
-        result = str.split(',', data)
-        return {'node_id': result[0], 'log_id': result[1]}
+        result = data.split(',')
+        return {'node_id': int(result[0]), 'log_id': int(result[1])}

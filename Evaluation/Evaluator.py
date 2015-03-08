@@ -1,4 +1,4 @@
-from Evaluation import EvaluatorBehaviorInterface
+from Evaluation.EvaluatorBehaviorInterface import EvaluatorBehaviorInterface
 
 __author__ = 'Malte-Christian'
 
@@ -14,20 +14,29 @@ class Evaluator:
     """
     def add_behavior(self, behavior):
         if isinstance(behavior, EvaluatorBehaviorInterface):
-            self.behaviors.append(behavior)
+            self._behaviors.append(behavior)
         else:
             raise Exception('Wrong Interface.')
 
     def _refresh_data(self):
         # Get latest log data from queue
+        print self._log_data
         while True:
             try:
                 data = self._log_data_queue.get(block=False)
 
+                # Initialise node log table if not exist
                 try:
-                    self._log_data[data['log_id']].update(data['data'])  # Merge with existing log data
+                    self._log_data[int(data['node_id'])]
                 except KeyError:
-                    self._log_data[data['log_id']] = data['data']  # Add new log data
+                    self._log_data[int(data['node_id'])] = {}
+
+                try:
+                    # Merge with existing log data
+                    self._log_data[int(data['node_id'])][int(data['log_id'])].update(data['data'])
+                except KeyError:
+                    # Add new log data
+                    self._log_data[int(data['node_id'])][int(data['log_id'])] = data['data']
 
             except Exception:
                 break

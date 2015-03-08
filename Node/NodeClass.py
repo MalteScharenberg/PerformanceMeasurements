@@ -49,7 +49,7 @@ class NodeClass(multiprocessing.Process):
 
     def received_packet(self, packet):
         for behavior in self._behaviors:
-            behavior.received_status(self, packet)
+            behavior.received_packet(packet)
 
     """
     Should be invoked by hardware interface
@@ -57,7 +57,7 @@ class NodeClass(multiprocessing.Process):
 
     def received_status(self, status):
         for behavior in self._behaviors:
-            behavior.received_status(self, status)
+            behavior.received_status(status)
 
     def set_address(self):
         pass
@@ -67,8 +67,8 @@ class NodeClass(multiprocessing.Process):
     """
 
     def set_log_data(self, node_id, log_id, data):
-        self._log_data_queue.put({'node_id': node_id,
-                                  'id': log_id,
+        self._log_data_queue.put({'node_id': int(node_id),
+                                  'log_id': int(log_id),
                                   'data': data})
 
     def check_channel(self):

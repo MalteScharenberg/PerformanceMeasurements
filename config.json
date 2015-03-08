@@ -1,7 +1,7 @@
 {
   "evaluator_behaviors": [
     {
-      "type": "throughput",
+      "type": "Throughput",
       "arguments": {}
     }
   ],

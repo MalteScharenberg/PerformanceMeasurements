@@ -9,6 +9,7 @@ from Helper.Printer import Printer
 from Hardware.HardwareMock import HardwareMock
 from Node.Source import Source
 from Node.Sink import Sink
+from Evaluation.Throughput import Throughput
 
 
 __author__ = 'Malte-Christian'
@@ -23,6 +24,10 @@ if __name__ == '__main__':
     # Parse config file
     try:
         config = json.load(open('config.json'))
+
+        for behavior in config['evaluator_behaviors']:
+                behavior = globals()[behavior['type']](**behavior['arguments'])
+                evaluator.add_behavior(behavior)
         for node_config in config['nodes']:
             hardware = globals()[node_config['hardware']['type']](**node_config['hardware']['arguments'])
             node = NodeClass(log_data_queue, hardware)
@@ -31,10 +36,10 @@ if __name__ == '__main__':
                 node.add_behavior(behavior)
             nodes.append(node)
     except KeyError, e:
-        print 'Error in config file:', e
+        print 'Key Error in config file:', e
         sys.exit(1)
     except TypeError, e:
-        print 'Error in config file:', e
+        print 'Type Error in config file:', e
         sys.exit(1)
 
     # Start node processes

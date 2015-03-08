@@ -17,6 +17,14 @@ class HardwareMock(HardwareInterface):
     def send_packet(self, frame_id, packet, dest, ack=1):
         HardwareMock.channel.put(packet)
 
+    def check_channel(self):
+        while True:
+            try:
+                data = HardwareMock.channel.get(block=False)
+                self.node.received_packet(data)
+            except Exception:
+                break
+
     def run(self):
         pass
 

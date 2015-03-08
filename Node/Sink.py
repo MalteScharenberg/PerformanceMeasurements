@@ -1,4 +1,5 @@
 
+import time
 from Node.NodeBehaviorInterface import NodeBehaviorInterface
 
 
@@ -10,10 +11,13 @@ class Sink(NodeBehaviorInterface):
         pass
 
     def received_packet(self, packet):
-        pass
+        status_time = time.time()
+        data = self.decode_sender_information(packet)
+        self.node.set_log_data(data['node_id'], data['log_id'], {'received_time': status_time})
 
     def received_status(self, status):
         pass
 
     def action(self):
-        pass
+        self.node.check_channel()
+        return True

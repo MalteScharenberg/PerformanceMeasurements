@@ -71,5 +71,8 @@ class NodeClass(multiprocessing.Process):
                                   'id': log_id,
                                   'data': data})
 
+    def check_channel(self):
+        self._hardware_interface.check_channel()
+
     def get_id(self):
         return self.id

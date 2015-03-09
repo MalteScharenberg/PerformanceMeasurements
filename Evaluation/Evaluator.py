@@ -1,4 +1,4 @@
-from Evaluation.EvaluatorBehaviorInterface import EvaluatorBehaviorInterface
+from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
 
 __author__ = 'Malte-Christian'
 
@@ -13,7 +13,7 @@ class Evaluator:
     Adds behavior to evaluator (e.g. delay, throughput,...)
     """
     def add_behavior(self, behavior):
-        if isinstance(behavior, EvaluatorBehaviorInterface):
+        if isinstance(behavior, EvaluatorBehaviorBase):
             self._behaviors.append(behavior)
         else:
             raise Exception('Wrong Interface.')
@@ -41,9 +41,11 @@ class Evaluator:
 
     def get_results(self, short=False):
         self._refresh_data()
-        result = []
+        result = {}
         for behavior in self._behaviors:
-            result.append(behavior.analyse(self._log_data, short))
+            behavior_result = behavior.analyse(self._log_data, short)
+            if behavior_result:
+                result[behavior.get_name()] = behavior_result
 
         return result
 

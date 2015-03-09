@@ -1,7 +1,7 @@
 __author__ = 'Malte-Christian'
 
 
-class HardwareInterface:
+class HardwareBase:
     def __init__(self):
         pass
 

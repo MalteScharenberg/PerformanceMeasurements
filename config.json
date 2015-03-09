@@ -2,12 +2,24 @@
   "evaluator_behaviors": [
     {
       "type": "Throughput",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 1,
+        "block_size": 10
+      }
+    },
+    {
+      "type": "Delay",
+      "matlab_export": false,
       "arguments": {
         "node_id": 1,
         "block_size": 10
       }
     }
   ],
+  "matlab_exporter": {
+    "file": "results.mat"
+  },
   "nodes": [
     {
       "behaviors": [

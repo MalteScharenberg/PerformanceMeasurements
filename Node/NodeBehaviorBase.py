@@ -1,7 +1,7 @@
 __author__ = 'Malte-Christian'
 
 
-class NodeBehaviorInterface:
+class NodeBehaviorBase:
     def __init__(self):
         self.node = None
         raise NotImplementedError("Should have implemented this")

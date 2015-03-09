@@ -2,13 +2,13 @@ import time
 import random
 import string
 
-from Node.NodeBehaviorInterface import NodeBehaviorInterface
+from Node.NodeBehaviorBase import NodeBehaviorBase
 
 
 __author__ = 'Malte-Christian'
 
 
-class Source(NodeBehaviorInterface):
+class Source(NodeBehaviorBase):
     def __init__(self, quantity, payload, dest, ack=1):
         self.quantity = quantity
         self.payload = payload

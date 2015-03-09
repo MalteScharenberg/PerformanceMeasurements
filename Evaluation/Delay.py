@@ -4,7 +4,7 @@ from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
 __author__ = 'Malte-Christian'
 
 
-class Throughput(EvaluatorBehaviorBase):
+class Delay(EvaluatorBehaviorBase):
     def __init__(self, node_id, block_size):
         self.node_id = int(node_id)
         self.block_size = block_size
@@ -27,11 +27,15 @@ class Throughput(EvaluatorBehaviorBase):
                 if 'received_time' in node_data[i]:
                     payload += node_data[i]['payload']
             try:
-                throughput = (
+                throughput = "%f kbits" % (
                     payload / (node_data[n + self.block_size - 1]['send_time'] - node_data[n]['send_time']) / 1000)
+
+                if not short:
+                    result.append(throughput)
+                else:
+                    result = throughput
+
             except KeyError, e:
                 print e, node_data, n
-
-        result = {'data': result, 'dimension': 'kbits'}
 
         return result

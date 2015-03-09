@@ -2,13 +2,13 @@ import serial
 from xbee import XBee
 from xbee.helpers.dispatch import Dispatch
 
-from Hardware import HardwareInterface
+from Hardware import HardwareBase
 
 
 __author__ = 'Malte-Christian'
 
 
-class XBeeWrapper(HardwareInterface):
+class XBeeWrapper(HardwareBase):
     def __init__(self, port):
         self._port = port
         self._serial = serial.Serial()

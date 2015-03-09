@@ -1,5 +1,5 @@
 import multiprocessing
-from Hardware.HardwareInterface import HardwareInterface
+from Hardware.HardwareBase import HardwareBase
 
 __author__ = 'Malte-Christian'
 
@@ -14,7 +14,7 @@ class NodeClass(multiprocessing.Process):
         self._behaviors = []
         self._log_data_queue = log_data_queue
 
-        assert isinstance(hardware_interface, HardwareInterface)
+        assert isinstance(hardware_interface, HardwareBase)
         self._hardware_interface = hardware_interface
         self._hardware_interface.register_node(self)
 

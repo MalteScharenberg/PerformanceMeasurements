@@ -1,12 +1,12 @@
 
 import time
-from Node.NodeBehaviorInterface import NodeBehaviorInterface
+from Node.NodeBehaviorBase import NodeBehaviorBase
 
 
 __author__ = 'Malte-Christian'
 
 
-class Sink(NodeBehaviorInterface):
+class Sink(NodeBehaviorBase):
     def __init__(self):
         pass
 

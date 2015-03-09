@@ -2,4 +2,5 @@ __author__ = 'Malte-Christian'
 
 
 class EvaluatorBehaviorInterface(object):
-    pass
+    def __init__(self):
+        pass

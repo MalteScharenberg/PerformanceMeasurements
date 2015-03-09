@@ -1,3 +1,5 @@
+import time
+import random
 import multiprocessing
 from Hardware.HardwareInterface import HardwareInterface
 
@@ -15,6 +17,7 @@ class HardwareMock(HardwareInterface):
         self.node = node
 
     def send_packet(self, frame_id, packet, dest, ack=1):
+        time.sleep(random.random())
         HardwareMock.channel.put(packet)
 
     def check_channel(self):

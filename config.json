@@ -2,7 +2,10 @@
   "evaluator_behaviors": [
     {
       "type": "Throughput",
-      "arguments": {}
+      "arguments": {
+        "node_id": 1,
+        "block_size": 10
+      }
     }
   ],
   "nodes": [

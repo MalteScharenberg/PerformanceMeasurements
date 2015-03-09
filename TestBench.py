@@ -47,7 +47,10 @@ if __name__ == '__main__':
 
     # source.join()
     # print('ende')
-    while True:
-        results = evaluator.get_results()
-        printer.print_results(results)
-        time.sleep(1)
+    try:
+        while True:
+            results = evaluator.get_short_result()
+            printer.print_results(results)
+            time.sleep(1)
+    except KeyboardInterrupt:
+        pass

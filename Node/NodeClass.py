@@ -20,11 +20,13 @@ class NodeClass(multiprocessing.Process):
 
     def run(self):
         self._hardware_interface.run()  # open serial port in child process (after fork)
+        try:
 
-        while len(self._behaviors) > 0:
-            # invoke action() on each behavior and remove behavior from list if action() returns 'false'
-            self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
-
+            while len(self._behaviors) > 0:
+                # invoke action() on each behavior and remove behavior from list if action() returns 'false'
+                self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
+        except KeyboardInterrupt:
+            print '\nShouting down node %d...' % self.get_id()
         self._hardware_interface.stop()
 
     """

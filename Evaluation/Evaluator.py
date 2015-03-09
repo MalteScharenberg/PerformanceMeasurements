@@ -20,7 +20,6 @@ class Evaluator:
 
     def _refresh_data(self):
         # Get latest log data from queue
-        print self._log_data
         while True:
             try:
                 data = self._log_data_queue.get(block=False)
@@ -37,7 +36,6 @@ class Evaluator:
                 except KeyError:
                     # Add new log data
                     self._log_data[int(data['node_id'])][int(data['log_id'])] = data['data']
-
             except Exception:
                 break
 

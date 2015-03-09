@@ -1,11 +1,10 @@
+__author__ = 'Malte-Christian'
+
 import serial
 from xbee import XBee
 from xbee.helpers.dispatch import Dispatch
 
 from Hardware import HardwareBase
-
-
-__author__ = 'Malte-Christian'
 
 
 class XBeeWrapper(HardwareBase):

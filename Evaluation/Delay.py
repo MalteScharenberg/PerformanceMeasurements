@@ -1,7 +1,7 @@
+__author__ = 'Malte-Christian'
+
 import math
 from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
-
-__author__ = 'Malte-Christian'
 
 
 class Delay(EvaluatorBehaviorBase):

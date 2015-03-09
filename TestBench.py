@@ -1,3 +1,5 @@
+__author__ = 'Malte-Christian'
+
 import multiprocessing
 import time
 import json
@@ -5,21 +7,19 @@ import sys
 
 from Node.NodeClass import NodeClass
 from Evaluation.Evaluator import Evaluator
+from Evaluation.Delay import Delay
+from Evaluation.Throughput import Throughput
 from Helper.Printer import Printer
 from Helper.MatlabExporter import MatlabExporter
 from Hardware.HardwareMock import HardwareMock
+from Hardware.XBeeWrapper import XBeeWrapper
 from Node.Source import Source
 from Node.Sink import Sink
-from Evaluation.Throughput import Throughput
-from Evaluation.Delay import Delay
-
-__author__ = 'Malte-Christian'
-
 
 if __name__ == '__main__':
+    # Init
     log_data_queue = multiprocessing.Queue()
     evaluator = Evaluator(log_data_queue)
-
     printer = Printer()
     nodes = []
 
@@ -47,8 +47,6 @@ if __name__ == '__main__':
     # Start node processes
     map(NodeClass.start, nodes)
 
-    # source.join()
-    # print('ende')
     try:
         while True:
             results = evaluator.get_short_results()

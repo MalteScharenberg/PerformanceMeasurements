@@ -1,6 +1,6 @@
-from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
-
 __author__ = 'Malte-Christian'
+
+from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
 
 
 class Evaluator:
@@ -12,6 +12,7 @@ class Evaluator:
     """
     Adds behavior to evaluator (e.g. delay, throughput,...)
     """
+
     def add_behavior(self, behavior):
         if isinstance(behavior, EvaluatorBehaviorBase):
             self._behaviors.append(behavior)
@@ -46,7 +47,6 @@ class Evaluator:
             behavior_result = behavior.analyse(self._log_data, short)
             if behavior_result:
                 result[behavior.get_name()] = behavior_result
-
         return result
 
     def get_short_results(self):

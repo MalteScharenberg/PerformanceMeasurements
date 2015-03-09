@@ -1,9 +1,9 @@
+__author__ = 'Malte-Christian'
+
 import time
 import random
 import multiprocessing
 from Hardware.HardwareBase import HardwareBase
-
-__author__ = 'Malte-Christian'
 
 
 class HardwareMock(HardwareBase):

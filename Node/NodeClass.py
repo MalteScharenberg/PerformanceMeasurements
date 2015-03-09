@@ -1,8 +1,8 @@
+__author__ = 'Malte-Christian'
+
 import multiprocessing
 import time
 from Hardware.HardwareBase import HardwareBase
-
-__author__ = 'Malte-Christian'
 
 
 class NodeClass(multiprocessing.Process):

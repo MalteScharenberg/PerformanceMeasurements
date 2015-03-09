@@ -15,27 +15,27 @@ class Delay(EvaluatorBehaviorBase):
             size = len(node_data)
         except KeyError:
             return
-        end = int(math.floor(size / self.block_size)) + 1
+        end = int(math.floor(size / self.block_size))
         start = end - 1 if short else 1
-        if start < 1:
+        if start < 0:
             return
-        result = []
+
+        delay = []
         for n in range(start, end):
-            # Calculate transferred data
-            payload = 0
-            for i in range(1, self.block_size + 1):
-                if 'received_time' in node_data[i]:
-                    payload += node_data[i]['payload']
+            # Sum up delays
+            delay_sum = 0
+            received_packets = 0
+            for i in range(n * self.block_size + 1, (n + 1) * self.block_size + 1):
+                try:
+                    delay_sum += node_data[i]['received_time'] - node_data[i]['send_time']
+                    received_packets += 1
+                except KeyError, e:
+                    print 'Key error: %d' % e.message
             try:
-                throughput = "%f kbits" % (
-                    payload / (node_data[n + self.block_size - 1]['send_time'] - node_data[n]['send_time']) / 1000)
-
-                if not short:
-                    result.append(throughput)
-                else:
-                    result = throughput
-
+                delay.append(delay_sum / received_packets)
             except KeyError, e:
                 print e, node_data, n
+
+        result = {'data': delay, 'dimension': 's'}
 
         return result

@@ -15,20 +15,20 @@ class Throughput(EvaluatorBehaviorBase):
             size = len(node_data)
         except KeyError:
             return
-        end = int(math.floor(size / self.block_size)) + 1
+        end = int(math.floor(size / self.block_size))
         start = end - 1 if short else 1
-        if start < 1:
+        if start < 0:
             return
         throughput = []
         for n in range(start, end):
             # Calculate transferred data
             payload = 0
-            for i in range(1, self.block_size + 1):
+            for i in range(n * self.block_size + 1, (n + 1) * self.block_size + 1):
                 if 'received_time' in node_data[i]:
                     payload += node_data[i]['payload']
             try:
                 throughput.append(
-                    payload / (node_data[n + self.block_size - 1]['send_time'] - node_data[n]['send_time']) / 1000)
+                    payload / (node_data[(n + 1) * self.block_size]['send_time'] - node_data[n * self.block_size + 1]['send_time']) / 1000)
             except KeyError, e:
                 print e, node_data, n
 

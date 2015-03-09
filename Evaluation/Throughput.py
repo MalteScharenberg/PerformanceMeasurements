@@ -19,7 +19,7 @@ class Throughput(EvaluatorBehaviorBase):
         start = end - 1 if short else 1
         if start < 1:
             return
-        result = []
+        throughput = []
         for n in range(start, end):
             # Calculate transferred data
             payload = 0
@@ -27,11 +27,11 @@ class Throughput(EvaluatorBehaviorBase):
                 if 'received_time' in node_data[i]:
                     payload += node_data[i]['payload']
             try:
-                throughput = (
+                throughput.append(
                     payload / (node_data[n + self.block_size - 1]['send_time'] - node_data[n]['send_time']) / 1000)
             except KeyError, e:
                 print e, node_data, n
 
-        result = {'data': result, 'dimension': 'kbits'}
+        result = {'data': throughput, 'dimension': 'kbits'}
 
         return result

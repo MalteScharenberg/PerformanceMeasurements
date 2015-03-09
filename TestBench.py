@@ -51,9 +51,10 @@ if __name__ == '__main__':
     # print('ende')
     try:
         while True:
-            results = evaluator.get_short_result()
+            results = evaluator.get_short_results()
             printer.print_short_results(results)
             time.sleep(1)
     except KeyboardInterrupt:
         results = evaluator.get_results()
+        printer.print_results(results)
         matlab_exporter.export(results)

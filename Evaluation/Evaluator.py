@@ -49,5 +49,5 @@ class Evaluator:
 
         return result
 
-    def get_short_result(self):
+    def get_short_results(self):
         return self.get_results(True)

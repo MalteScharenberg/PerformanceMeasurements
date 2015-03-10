@@ -4,7 +4,7 @@ import serial
 from xbee import XBee
 from xbee.helpers.dispatch import Dispatch
 
-from Hardware import HardwareBase
+from Hardware.HardwareBase import HardwareBase
 
 
 class XBeeWrapper(HardwareBase):

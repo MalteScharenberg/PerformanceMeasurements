@@ -8,12 +8,15 @@ from Hardware.HardwareBase import HardwareBase
 
 
 class XBeeWrapper(HardwareBase):
-    def __init__(self, port):
-        self._port = port
+    def __init__(self, address=None):
         self._serial = serial.Serial()
         self._xbee = XBee()
         self._dispatcher = Dispatch()
         self.node = None
+
+        # Set address
+        if address:
+            self.xbee.at(command='MY', parameter=chr(address), frame_id='\x01')
 
         # Init the dispatcher
         self.dispatcher.register(

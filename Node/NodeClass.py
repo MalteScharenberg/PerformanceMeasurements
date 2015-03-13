@@ -20,12 +20,23 @@ class NodeClass(multiprocessing.Process):
         self._hardware_interface.register_node(self)
 
     def run(self):
-        self._hardware_interface.run()  # open serial port in child process (after fork)
+        self._hardware_interface.run()  # open serial port at child process (after fork)
+
         try:
             while len(self._behaviors) > 0:
-                time.sleep(0.001)  # avoid busy waiting
                 # invoke action() on each behavior and remove behavior from list if action() returns 'false'
-                self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
+                # self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
+
+                sleep = False
+
+                for behavior in self._behaviors:
+                    behavior.action()
+                    if sleep is False or behavior.get_max_sleep_time() < sleep:
+                        sleep = float(behavior.get_max_sleep_time())
+
+                if sleep:
+                    time.sleep(sleep)  # Sleep to avoid busy waiting
+
         except KeyboardInterrupt:
             pass
 

@@ -7,30 +7,7 @@
         "node_id": 1,
         "block_size": 10
       }
-    },
-    {
-      "type": "Throughput",
-      "matlab_export": true,
-      "arguments": {
-        "node_id": 2,
-        "block_size": 10
-      }
-    },
-    {
-      "type": "Throughput",
-      "matlab_export": true,
-      "arguments": {
-        "node_id": 3,
-        "block_size": 10
-      }
-    },
-    {
-      "type": "Throughput",
-      "matlab_export": true,
-      "arguments": {
-        "node_id": 4,
-        "block_size": 10
-      }
+
     }
   ],
   "matlab_exporter": {
@@ -54,66 +31,6 @@
         "arguments": {
           "port": "/dev/tty.usbserial-DA0121K1",
           "address": 10
-        }
-      }
-    },
-    {
-      "behaviors": [
-        {
-          "type": "Source",
-          "arguments": {
-            "quantity": 1000,
-            "payload": 100,
-            "dest": 12,
-            "ack": 1
-          }
-        }
-      ],
-      "hardware": {
-        "type": "XBeeWrapper",
-        "arguments": {
-          "port": "/dev/tty.usbserial-DA0121KA",
-          "address": 11
-        }
-      }
-    },
-    {
-      "behaviors": [
-        {
-          "type": "Source",
-          "arguments": {
-            "quantity": 1000,
-            "payload": 100,
-            "dest": 12,
-            "ack": 1
-          }
-        }
-      ],
-      "hardware": {
-        "type": "XBeeWrapper",
-        "arguments": {
-          "port": "/dev/tty.usbserial-DA0121K0",
-          "address": 11
-        }
-      }
-    },
-    {
-      "behaviors": [
-        {
-          "type": "Source",
-          "arguments": {
-            "quantity": 1000,
-            "payload": 100,
-            "dest": 12,
-            "ack": 1
-          }
-        }
-      ],
-      "hardware": {
-        "type": "XBeeWrapper",
-        "arguments": {
-          "port": "/dev/tty.usbserial-DA012024",
-          "address": 11
         }
       }
     }

@@ -34,7 +34,7 @@ class Source(NodeBehaviorBase):
         if self.log_id <= self.quantity:
             self.quantity -= 1
             self.log_id += 1
-            header = self.encode_sender_information(self.node.get_id(), self.log_id)
+            header = Source.encode_sender_information(self.node.get_id(), self.log_id)
             data = header + self.generate_data(self.payload - len(header))
             frame_id = self.register_frame_id(self.log_id)
             send_time = time.time()
@@ -42,7 +42,16 @@ class Source(NodeBehaviorBase):
             self.node.set_log_data(self.node.get_id(), self.log_id, {'send_time': send_time,
                                                                      'payload': len(data)})
 
+        # if self.log_id == self.quantity:
+            # print "Node %d finished sending." % self.node.get_id()
+
         return True
+
+    def get_max_sleep_time(self):
+        if self.log_id <= self.quantity:
+            return 0
+        else:
+            return 1
 
     def generate_data(self, size):
         return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(size))

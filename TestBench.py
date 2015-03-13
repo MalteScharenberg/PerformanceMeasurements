@@ -49,10 +49,12 @@ if __name__ == '__main__':
 
     try:
         while True:
-            results = evaluator.get_short_results()
-            printer.print_short_results(results)
-            time.sleep(1)
+            # results = evaluator.get_short_results()
+            # printer.print_short_results(results)
+            time.sleep(0.005)
     except KeyboardInterrupt:
-        results = evaluator.get_results()
-        printer.print_results(results)
-        matlab_exporter.export(results)
+        pass
+
+    results = evaluator.get_results()
+    printer.print_results(results)
+    matlab_exporter.export(results)

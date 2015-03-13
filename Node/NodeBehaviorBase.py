@@ -18,9 +18,14 @@ class NodeBehaviorBase:
     def action(self):
         raise NotImplementedError("Should have implemented this")
 
-    def encode_sender_information(self, node_id, log_id):
+    def get_max_sleep_time(self):
+        raise NotImplementedError("Should have implemented this")
+
+    @staticmethod
+    def encode_sender_information(node_id, log_id):
         return str(node_id) + ',' + str(log_id) + ','
 
-    def decode_sender_information(self, data):
+    @staticmethod
+    def decode_sender_information(data):
         result = data.split(',')
         return {'node_id': int(result[0]), 'log_id': int(result[1])}

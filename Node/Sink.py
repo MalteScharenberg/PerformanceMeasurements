@@ -12,7 +12,7 @@ class Sink(NodeBehaviorBase):
 
     def received_packet(self, packet):
         status_time = time.time()
-        data = self.decode_sender_information(packet)
+        data = Sink.decode_sender_information(packet)
         self.node.set_log_data(data['node_id'], data['log_id'], {'received_time': status_time})
 
     def received_status(self, status):

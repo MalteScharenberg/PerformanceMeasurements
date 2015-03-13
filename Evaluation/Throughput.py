@@ -1,4 +1,4 @@
-__author__ = 'Malte-Christian'
+__author__ = 'Malte-Christian Scharenberg'
 
 import math
 from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
@@ -8,6 +8,9 @@ class Throughput(EvaluatorBehaviorBase):
     def __init__(self, node_id, block_size):
         self.node_id = int(node_id)
         self.block_size = block_size
+
+    def get_name(self):
+        return self.__class__.__name__ + ' Node ' + str(self.node_id)
 
     def analyse(self, data, short):
         try:
@@ -24,7 +27,7 @@ class Throughput(EvaluatorBehaviorBase):
             # Calculate transferred data
             payload = 0
             for i in range(n * self.block_size + 1, (n + 1) * self.block_size + 1):
-                if 'received_time' in node_data[i]:
+                if 'status' in node_data[i] and node_data[i]['status'] == '\x00':
                     payload += node_data[i]['payload']
             try:
                 throughput.append(

@@ -1,4 +1,4 @@
-__author__ = 'Malte-Christian'
+__author__ = 'Malte-Christian Scharenberg'
 
 import time
 import random
@@ -17,7 +17,7 @@ class HardwareMock(HardwareBase):
         self.node = node
 
     def send_packet(self, frame_id, packet, dest, ack=1):
-        time.sleep(0.5 * random.random())
+        # time.sleep(0.0025)
         HardwareMock.channel.put(packet)
 
     def check_channel(self):

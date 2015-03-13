@@ -1,4 +1,4 @@
-__author__ = 'Malte-Christian'
+__author__ = 'Malte-Christian Scharenberg'
 
 
 class EvaluatorBehaviorBase:
@@ -6,4 +6,4 @@ class EvaluatorBehaviorBase:
         pass
 
     def get_name(self):
-        return self.__class__.__name__
+        raise NotImplementedError("Should have implemented this")

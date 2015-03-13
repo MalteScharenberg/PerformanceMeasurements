@@ -1,4 +1,4 @@
-__author__ = 'Malte-Christian'
+__author__ = 'Malte-Christian Scharenberg'
 
 import sys
 
@@ -27,7 +27,8 @@ class Printer():
                 output_data += '{0} {1}'.format(data, dimension)
                 output_data = output_data if short else output_data + '\n'
 
-            output += (('' if short else '\n') + '{0}:' + ('' if short else '\n') + ' {1} ').format(result_key, output_data)
+            output += (('' if short else '\n') + '{0}:' + ('' if short else '\n') + ' {1} ').format(result_key,
+                                                                                                    output_data)
         if not short:
             print output
         else:

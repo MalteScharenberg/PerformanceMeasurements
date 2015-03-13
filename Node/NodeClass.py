@@ -1,4 +1,4 @@
-__author__ = 'Malte-Christian'
+__author__ = 'Malte-Christian Scharenberg'
 
 import multiprocessing
 import time
@@ -23,11 +23,12 @@ class NodeClass(multiprocessing.Process):
         self._hardware_interface.run()  # open serial port in child process (after fork)
         try:
             while len(self._behaviors) > 0:
-                time.sleep(0.0001)  # avoid busy waiting
+                time.sleep(0.001)  # avoid busy waiting
                 # invoke action() on each behavior and remove behavior from list if action() returns 'false'
                 self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
         except KeyboardInterrupt:
             pass
+
         print '\nShutting down node %d...' % self.get_id()
         self._hardware_interface.stop()
 
@@ -59,9 +60,9 @@ class NodeClass(multiprocessing.Process):
     Should be invoked by hardware interface
     """
 
-    def received_status(self, status):
+    def received_status(self, frame_id, status):
         for behavior in self._behaviors:
-            behavior.received_status(status)
+            behavior.received_status(frame_id, status)
 
     def set_address(self):
         pass

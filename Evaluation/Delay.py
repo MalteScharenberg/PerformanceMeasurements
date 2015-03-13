@@ -1,4 +1,4 @@
-__author__ = 'Malte-Christian'
+__author__ = 'Malte-Christian Scharenberg'
 
 import math
 from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
@@ -8,6 +8,9 @@ class Delay(EvaluatorBehaviorBase):
     def __init__(self, node_id, block_size):
         self.node_id = int(node_id)
         self.block_size = block_size
+
+    def get_name(self):
+        return self.__class__.__name__ + ' Node ' + str(self.node_id)
 
     def analyse(self, data, short):
         try:
@@ -30,7 +33,7 @@ class Delay(EvaluatorBehaviorBase):
                     delay_sum += node_data[i]['received_time'] - node_data[i]['send_time']
                     received_packets += 1
                 except KeyError, e:
-                    print 'Key error: %d' % e.message
+                    print 'Key error: %s' % e.message
             try:
                 delay.append(delay_sum / received_packets)
             except KeyError, e:

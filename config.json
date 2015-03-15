@@ -28,9 +28,10 @@
           "type": "Source",
           "arguments": {
             "quantity": 1000,
-            "payload": 10,
+            "payload": 50,
             "dest": 11,
-            "ack": 1
+            "ack": 1,
+            "full_buffer": false
           }
         }
       ],

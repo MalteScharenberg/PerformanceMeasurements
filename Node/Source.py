@@ -9,11 +9,12 @@ __author__ = 'Malte-Christian Scharenberg'
 
 
 class Source(NodeBehaviorBase):
-    def __init__(self, quantity, payload, dest, ack=1):
+    def __init__(self, quantity, payload, dest, ack=1, full_buffer=True):
         self.quantity = quantity
         self.payload = payload
         self.dest = dest
         self.ack = ack
+        self.full_buffer = full_buffer
         self.log_id = 0
         self.frame_ids = [None] * 255  # Preallocate list for frame id translation
         self.node = None
@@ -60,10 +61,15 @@ class Source(NodeBehaviorBase):
 
     def register_frame_id(self, new_log_id):
         new_frame_id = False
-        for frame_id, log_id in enumerate(self.frame_ids):
-            if log_id is None:
-                new_frame_id = frame_id + 1
-                self.frame_ids[frame_id] = new_log_id
-                break
+        if self.full_buffer:
+            for frame_id, log_id in enumerate(self.frame_ids):
+                if log_id is None:
+                    new_frame_id = frame_id + 1
+                    self.frame_ids[frame_id] = new_log_id
+                    break
+        else:
+            if self.frame_ids[0] is None:
+                new_frame_id = 1
+                self.frame_ids[0] = new_log_id
 
         return new_frame_id

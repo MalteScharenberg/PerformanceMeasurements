@@ -15,6 +15,8 @@ class Delay(EvaluatorBehaviorBase):
     def analyse(self, data, short):
         try:
             node_data = data[self.node_id]
+            node_data = filter(lambda date: 'received_time' in date and 'status_time' in date,
+                               node_data)  # Filter input data
             size = len(node_data)
         except KeyError:
             return
@@ -28,9 +30,9 @@ class Delay(EvaluatorBehaviorBase):
             # Sum up delays
             delay_sum = 0
             received_packets = 0
-            for i in range(n * self.block_size + 1, (n + 1) * self.block_size + 1):
+            for i in range(n * self.block_size, (n + 1) * self.block_size):
                 try:
-                    delay_sum += node_data[i]['received_time'] - node_data[i]['send_time']
+                    delay_sum += node_data[i]['received_time'] - node_data[i]['status_time']
                     received_packets += 1
                 except KeyError, e:
                     print 'Key error: %s' % e.message

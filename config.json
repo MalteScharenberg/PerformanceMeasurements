@@ -7,6 +7,14 @@
         "node_id": 1,
         "block_size": 10
       }
+    },
+    {
+      "type": "Delay",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 1,
+        "block_size": 10
+      }
 
     }
   ],
@@ -20,8 +28,8 @@
           "type": "Source",
           "arguments": {
             "quantity": 1000,
-            "payload": 100,
-            "dest": 12,
+            "payload": 10,
+            "dest": 11,
             "ack": 1
           }
         }
@@ -31,6 +39,22 @@
         "arguments": {
           "port": "/dev/tty.usbserial-DA0121K1",
           "address": 10
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Sink",
+          "arguments": {
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA0121K0",
+          "address": 11
         }
       }
     }

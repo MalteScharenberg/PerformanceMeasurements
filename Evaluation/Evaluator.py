@@ -40,11 +40,25 @@ class Evaluator:
             except Exception:
                 break
 
-    def get_results(self, short=False):
+    def get_raw_data(self):
         self._refresh_data()
         result = {}
+
+        # Sort log data and transform into list
+        for node_data in self._log_data.items():
+            result[node_data[0]] = []
+            log_ids = node_data[1].keys()
+            log_ids.sort()
+            for log_id in log_ids:
+                result[node_data[0]].append(node_data[1][log_id])
+
+        return result
+
+    def get_results(self, short=False):
+        raw_data = self.get_raw_data()
+        result = {}
         for behavior in self._behaviors:
-            behavior_result = behavior.analyse(self._log_data, short)
+            behavior_result = behavior.analyse(raw_data, short)
             if behavior_result:
                 result[behavior.get_name()] = behavior_result
         return result

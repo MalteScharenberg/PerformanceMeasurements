@@ -15,6 +15,7 @@ class Throughput(EvaluatorBehaviorBase):
     def analyse(self, data, short):
         try:
             node_data = data[self.node_id]
+            node_data = filter(lambda date: 'status' in date, node_data)  # Filter input data
             size = len(node_data)
         except KeyError:
             return
@@ -26,12 +27,12 @@ class Throughput(EvaluatorBehaviorBase):
         for n in range(start, end):
             # Calculate transferred data
             payload = 0
-            for i in range(n * self.block_size + 1, (n + 1) * self.block_size + 1):
-                if 'status' in node_data[i] and node_data[i]['status'] == '\x00':
+            for i in range(n * self.block_size, (n + 1) * self.block_size):
+                if node_data[i]['status'] == '\x00':
                     payload += node_data[i]['payload']
             try:
                 throughput.append(
-                    payload / (node_data[(n + 1) * self.block_size]['status_time'] - node_data[n * self.block_size + 1][
+                    payload / (node_data[(n + 1) * self.block_size - 1]['status_time'] - node_data[n * self.block_size][
                         'status_time']) / 1000)
             except KeyError, e:
                 print e, node_data, n

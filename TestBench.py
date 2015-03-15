@@ -49,8 +49,8 @@ if __name__ == '__main__':
 
     try:
         while True:
-            # results = evaluator.get_short_results()
-            # printer.print_short_results(results)
+            results = evaluator.get_short_results()
+            printer.print_short_results(results)
             time.sleep(0.005)
     except KeyboardInterrupt:
         pass

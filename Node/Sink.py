@@ -21,3 +21,6 @@ class Sink(NodeBehaviorBase):
     def action(self):
         self.node.check_channel()
         return True
+
+    def get_max_sleep_time(self):
+        return 1

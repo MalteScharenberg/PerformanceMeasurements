@@ -33,16 +33,20 @@ class XBeeWrapper(HardwareBase):
         self.node = node
 
     def run(self):
-        self._serial = serial.Serial(self._port, 115000, stopbits=serial.STOPBITS_TWO, rtscts=1)
-        self._xbee = XBee(self._serial, callback=self._dispatcher.dispatch)
+        try:
+            self._serial = serial.Serial(self._port, 115000, stopbits=serial.STOPBITS_TWO, rtscts=1)
+            self._xbee = XBee(self._serial, callback=self._dispatcher.dispatch)
 
-        # Set address
-        if self._address:
-            self._xbee.at(command='MY', parameter=chr(self._address), frame_id='\x01')
+            # Set address
+            if self._address:
+                self._xbee.at(command='MY', parameter=chr(self._address), frame_id='\x01')
+        except OSError, e:
+            print e
 
     def stop(self):
-        self._xbee.halt()
-        self._serial.close()
+        if self._xbee is not None:
+            self._xbee.halt()
+            self._serial.close()
 
     def status_handler(self, name, packet):
         if self.node is not None:
@@ -57,4 +61,5 @@ class XBeeWrapper(HardwareBase):
             self.node.received_packet(data)
 
     def send_packet(self, frame_id, data, dest, ack=1):
-        self._xbee.tx(frame_id=chr(frame_id), dest_addr='\x00' + chr(dest), data=data, options=chr(ack))
+        if self._xbee is not None:
+            self._xbee.tx(frame_id=chr(frame_id), dest_addr='\x00' + chr(dest), data=data, options=chr(ack))

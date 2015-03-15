@@ -47,7 +47,7 @@ if __name__ == '__main__':
     map(NodeClass.start, nodes)  # Start node processes
 
     try:
-        while True:
+        while any(map(NodeClass.is_alive, nodes)):  # Check if nodes are still alive
             results = evaluator.get_short_results()
             printer.print_short_results(results)
             time.sleep(0.005)

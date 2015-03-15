@@ -28,8 +28,8 @@ if __name__ == '__main__':
         config = json.load(open('config.json'))
         matlab_exporter = MatlabExporter(config['matlab_exporter']['file'])
         for behavior in config['evaluator_behaviors']:
-                behavior = globals()[behavior['type']](**behavior['arguments'])
-                evaluator.add_behavior(behavior)
+            behavior = globals()[behavior['type']](**behavior['arguments'])
+            evaluator.add_behavior(behavior)
         for node_config in config['nodes']:
             hardware = globals()[node_config['hardware']['type']](**node_config['hardware']['arguments'])
             node = NodeClass(log_data_queue, hardware)
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     try:
         while any(map(NodeClass.is_alive, nodes)):  # Check if nodes are still alive
             results = evaluator.get_short_results()
-            printer.print_short_results(results)
+            printer.print_short_results(results)  # output live results
             time.sleep(0.005)
     except KeyboardInterrupt:
         pass

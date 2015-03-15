@@ -5,7 +5,7 @@
       "matlab_export": true,
       "arguments": {
         "node_id": 1,
-        "block_size": 10
+        "block_size": 100
       }
     },
     {
@@ -13,7 +13,7 @@
       "matlab_export": true,
       "arguments": {
         "node_id": 1,
-        "block_size": 10
+        "block_size": 100
       }
 
     }

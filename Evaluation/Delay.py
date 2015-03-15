@@ -32,7 +32,7 @@ class Delay(EvaluatorBehaviorBase):
             received_packets = 0
             for i in range(n * self.block_size, (n + 1) * self.block_size):
                 try:
-                    delay_sum += node_data[i]['received_time'] - node_data[i]['status_time']
+                    delay_sum += node_data[i]['received_time'] - node_data[i]['send_time']
                     received_packets += 1
                 except KeyError, e:
                     print 'Key error: %s' % e.message

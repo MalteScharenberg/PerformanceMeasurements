@@ -28,11 +28,15 @@ class NodeClass(multiprocessing.Process):
                 # self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
 
                 sleep = False
-
+                behaviors = []
                 for behavior in self._behaviors:
-                    behavior.action()
+                    if behavior.action():  # remove behavior if return value is false
+                        behaviors.append(behavior)
+
                     if sleep is False or behavior.get_max_sleep_time() < sleep:
                         sleep = float(behavior.get_max_sleep_time())
+
+                self._behaviors = behaviors
 
                 if sleep:
                     time.sleep(sleep)  # Sleep to avoid busy waiting

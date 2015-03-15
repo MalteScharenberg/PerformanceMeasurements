@@ -1,6 +1,7 @@
 import time
 import random
 import string
+import math
 
 from Node.NodeBehaviorBase import NodeBehaviorBase
 
@@ -9,8 +10,9 @@ __author__ = 'Malte-Christian Scharenberg'
 
 
 class Source(NodeBehaviorBase):
-    def __init__(self, quantity, payload, dest, ack=1, full_buffer=True):
+    def __init__(self, quantity, payload, dest, ack=1, full_buffer=True, increase_payload=False):
         self.quantity = quantity
+        self.increase_payload = increase_payload
         self.payload = payload
         self.dest = dest
         self.ack = ack
@@ -39,8 +41,11 @@ class Source(NodeBehaviorBase):
             frame_id = self.register_frame_id(self.log_id)
             if frame_id is False:  # Wait for frame_id
                 return True
-            header = Source.encode_sender_information(self.node.get_id(), self.log_id)
-            data = header + self.generate_data(self.payload - len(header))
+
+            last = self.log_id == self.quantity
+            header = Source.encode_sender_information(self.node.get_id(), self.log_id, last)
+            data = header + self.generate_data(self.get_payload() - len(header))
+
             send_time = time.time()
             self.node.send_packet(frame_id, data, self.dest, self.ack)
             self.node.set_log_data(self.node.get_id(), self.log_id, {'send_time': send_time,
@@ -55,6 +60,14 @@ class Source(NodeBehaviorBase):
             return 0
         else:
             return 1
+
+    def get_payload(self):
+        if self.increase_payload:
+            steps = math.floor(self.payload / 10)
+            step_size = math.floor(self.quantity / steps)
+            return int(math.floor(self.log_id / step_size) * self.payload / steps)
+        else:
+            return self.payload
 
     def generate_data(self, size):
         return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(size))

@@ -44,8 +44,7 @@ if __name__ == '__main__':
         print 'Type Error in config file:', e
         sys.exit(1)
 
-    # Start node processes
-    map(NodeClass.start, nodes)
+    map(NodeClass.start, nodes)  # Start node processes
 
     try:
         while True:

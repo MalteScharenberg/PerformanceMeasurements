@@ -39,9 +39,12 @@ class XBeeWrapper(HardwareBase):
 
             # Set address
             if self._address:
-                self._xbee.at(command='MY', parameter=chr(self._address), frame_id='\x01')
+                self.set_address(self._address)
         except OSError, e:
             print e
+
+    def set_address(self, address):
+        self._xbee.at(command='MY', parameter=chr(address), frame_id='\x01')
 
     def stop(self):
         if self._xbee is not None:

@@ -79,9 +79,6 @@ class NodeClass(multiprocessing.Process):
         for behavior in self._behaviors:
             behavior.received_status(frame_id, status)
 
-    def set_address(self):
-        pass
-
     """
     Should be invoked by behavior class
     """

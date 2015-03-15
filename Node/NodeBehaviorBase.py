@@ -22,10 +22,12 @@ class NodeBehaviorBase:
         raise NotImplementedError("Should have implemented this")
 
     @staticmethod
-    def encode_sender_information(node_id, log_id):
-        return str(node_id) + ',' + str(log_id) + ','
+    def encode_sender_information(node_id, log_id, last=False):
+        return str(node_id) + ',' + str(log_id) + ',' + ('1,' if last else '')
 
     @staticmethod
     def decode_sender_information(data):
         result = data.split(',')
-        return {'node_id': int(result[0]), 'log_id': int(result[1])}
+        return {'node_id': int(result[0]),
+                'log_id': int(result[1]),
+                'last': result[2] == '1'}

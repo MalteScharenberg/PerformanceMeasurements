@@ -32,31 +32,36 @@ class Delay(IEvaluatorBehavior):
         if start < 0:
             return
 
-        if self.group_by:
-            pass
-
         delay = []
         for n in range(start, end):
-
             # Sum up delays
             delay_sum = 0
             received_packets = 0
+            group_value = None
             for i in range(n * self.block_size, (n + 1) * self.block_size):
                 try:
+                    # handle grouping
+                    # simple implementation...therefore block size in config should match mutation of group value
+                    if self.group_by:
+                        if group_value is None:
+                            group_value = node_data[i][self.group_by]
+                        if node_data[i][self.group_by] != group_value:
+                            continue
+
                     delay_sum += node_data[i]['received_time'] - node_data[i]['send_time']
                     received_packets += 1
                 except KeyError, e:
                     print 'Key error: %s' % e.message
-            try:
-                delay.append(dict(data=delay_sum / received_packets,
-                                  desc=''))
-            except KeyError, e:
-                print e, node_data, n
+
+            if self.group_by:
+                desc = 'mean of {0} packets'.format(received_packets)
+            else:
+                desc = 'mean of {0} packets grouped by {1}={2}'.format(received_packets, self.group_by, group_value)
+
+            delay.append(dict(data=delay_sum / received_packets,
+                              desc=desc))
 
         result = dict(data=delay,
                       dimension='s')
 
         return result
-
-    def computation_callback(self, data):
-        pass

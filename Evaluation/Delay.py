@@ -32,6 +32,7 @@ class Delay(EvaluatorBehaviorBase):
 
         delay = []
         for n in range(start, end):
+
             # Sum up delays
             delay_sum = 0
             received_packets = 0

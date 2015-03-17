@@ -30,13 +30,13 @@ class Throughput(EvaluatorBehaviorBase):
             return
         throughput = []
         for n in range(start, end):
+
             # Calculate transferred data
             payload = 0
             for i in range(n * self.block_size,
                            (n + 1) * self.block_size):
                 if node_data[i]['status'] == '\x00':
                     payload += node_data[i]['payload']
-
             try:
                 throughput.append(
                     payload / (node_data[(n + 1) * self.block_size - 1]['status_time']

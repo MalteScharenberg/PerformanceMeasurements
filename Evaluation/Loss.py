@@ -14,11 +14,14 @@ class Loss(EvaluatorBehaviorBase):
     def analyse(self, data, short):
         try:
             node_data = data[self.node_id]
-            node_data = filter(lambda date: 'status' in date and date['status'] != '\x00',
-                               node_data)  # Filter input data
-            loss = len(node_data)
         except KeyError:
             return
+
+        # Filter input data
+        node_data = filter(lambda date: 'status' in date
+                                        and date['status'] != '\x00',
+                           node_data)
+        loss = len(node_data)
 
         result = {'data': loss, 'dimension': 'packets'}
 

@@ -35,3 +35,6 @@ class IHardware:
 
     def set_address(self, address):
         raise NotImplementedError("Should have implemented this")
+
+    def at_command(self, address):
+        raise NotImplementedError("Should have implemented this")

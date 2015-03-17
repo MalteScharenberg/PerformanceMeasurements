@@ -2,7 +2,7 @@ __author__ = 'Malte-Christian Scharenberg'
 
 import multiprocessing
 import time
-from Hardware.IHardware import IHardware
+from Hardware.IHardware import IHardware, HardwareException
 
 
 class NodeClass(multiprocessing.Process):
@@ -20,7 +20,11 @@ class NodeClass(multiprocessing.Process):
         self._hardware_interface.register_node(self)
 
     def run(self):
-        self._hardware_interface.run()  # open serial port at child process (after fork)
+        try:
+            self._hardware_interface.run()  # open serial port at child process (after fork)
+        except HardwareException, e:
+            print e
+            return  # Kill process
 
         try:
             while len(self._behaviors) > 0:

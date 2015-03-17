@@ -23,7 +23,7 @@ class Loss(IEvaluatorBehavior):
                            node_data)
         loss = len(node_data)
 
-        result = dict(data=loss,
+        result = dict(data=[loss],
                       dimension='packets')
 
         return result

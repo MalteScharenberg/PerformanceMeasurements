@@ -9,6 +9,7 @@ from Node.NodeClass import NodeClass
 from Evaluation.Evaluator import Evaluator
 from Evaluation.Delay import Delay
 from Evaluation.Throughput import Throughput
+from Evaluation.Loss import Loss
 from Helper.Logger import Logger
 from Helper.MatlabExporter import MatlabExporter
 from Hardware.HardwareMock import HardwareMock

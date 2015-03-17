@@ -1,6 +1,10 @@
 __author__ = 'Malte-Christian Scharenberg'
 
 
+class HardwareException(Exception):
+    pass
+
+
 class IHardware:
     def __init__(self):
         raise NotImplementedError("Should have implemented this")
@@ -12,6 +16,8 @@ class IHardware:
         """
         This method get's invoked after process fork.
         Serial Port association, etc, should be implemented here.
+
+        :raises HardwareException:
         """
         raise NotImplementedError("Should have implemented this")
 

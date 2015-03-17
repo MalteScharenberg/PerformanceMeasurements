@@ -4,7 +4,7 @@ import serial
 from xbee import XBee
 from xbee.helpers.dispatch import Dispatch
 
-from Hardware.IHardware import IHardware
+from Hardware.IHardware import IHardware, HardwareException
 
 
 class XBeeWrapper(IHardware):
@@ -41,7 +41,7 @@ class XBeeWrapper(IHardware):
             if self._address:
                 self.set_address(self._address)
         except OSError, e:
-            print e
+            raise HardwareException(e)
 
     def set_address(self, address):
         self._xbee.at(command='MY', parameter=chr(address), frame_id='\x01')
@@ -66,3 +66,6 @@ class XBeeWrapper(IHardware):
     def send_packet(self, frame_id, data, dest, ack=1):
         if self._xbee is not None:
             self._xbee.tx(frame_id=chr(frame_id), dest_addr='\x00' + chr(dest), data=data, options=chr(ack))
+
+    def check_channel(self):
+        pass

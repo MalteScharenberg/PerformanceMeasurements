@@ -8,4 +8,4 @@ class MatlabExporter:
         self.file = export_file
 
     def export(self, results):
-        sio.savemat(self.file, results)
+        sio.savemat(self.file, {'results': results['Delay Node 1']['data']})

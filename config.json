@@ -13,9 +13,16 @@
       "matlab_export": true,
       "arguments": {
         "node_id": 1,
-        "block_size": 200
+        "block_size": 200,
+        "group_by": "payload"
       }
-
+    },
+    {
+      "type": "Loss",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 1
+      }
     }
   ],
   "matlab_exporter": {

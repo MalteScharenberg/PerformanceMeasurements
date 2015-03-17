@@ -5,9 +5,10 @@ from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
 
 
 class Delay(EvaluatorBehaviorBase):
-    def __init__(self, node_id, block_size):
+    def __init__(self, node_id, block_size, group_by=False):
         self.node_id = int(node_id)
         self.block_size = block_size
+        self.group_by = group_by
 
     def get_name(self):
         return self.__class__.__name__ + ' Node ' + str(self.node_id)
@@ -15,13 +16,17 @@ class Delay(EvaluatorBehaviorBase):
     def analyse(self, data, short):
         try:
             node_data = data[self.node_id]
-            node_data = filter(lambda date: 'received_time' in date and 'status_time' in date,
-                               node_data)  # Filter input data
-            size = len(node_data)
         except KeyError:
             return
+
+        # Filter input data
+        node_data = filter(lambda date: 'received_time' in date,
+                           node_data)
+
+        size = len(node_data)
         end = int(math.floor(size / self.block_size))
         start = end - 1 if short else 1
+
         if start < 0:
             return
 

@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # Init
     log_data_queue = multiprocessing.Queue()
     evaluator = Evaluator(log_data_queue)
-    printer = Logger()
+    logger = Logger()
     nodes = []
 
     # Parse config file
@@ -49,11 +49,11 @@ if __name__ == '__main__':
     try:
         while any(map(NodeClass.is_alive, nodes)):  # Check if nodes are still alive
             results = evaluator.get_short_results()
-            printer.print_short_results(results)  # output live results
+            logger.print_short_results(results)  # output live results
             time.sleep(0.005)
     except KeyboardInterrupt:
         pass
 
     results = evaluator.get_results()
-    printer.print_results(results)
+    logger.print_results(results)
     matlab_exporter.export(results)

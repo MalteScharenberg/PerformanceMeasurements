@@ -23,8 +23,8 @@ class Throughput(IEvaluatorBehavior):
                            node_data)
 
         size = len(node_data)
-        end = int(math.floor(size / self.block_size))
-        start = end - 1 if short else 1
+        end = int(math.ceil(size / self.block_size))
+        start = end - 1 if short else 0
 
         if start < 0:
             return

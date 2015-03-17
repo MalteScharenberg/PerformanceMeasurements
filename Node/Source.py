@@ -53,7 +53,8 @@ class Source(NodeBehaviorBase):
             self.log_id += 1
             return True
         else:
-            return not all(frame_id is None for frame_id in self.frame_ids)  # Remove behavior
+            return not all(frame_id is None for frame_id in
+                           self.frame_ids)  # Remove behavior after all status messages are collected
 
     def get_max_sleep_time(self):
         if self.log_id <= self.quantity:
@@ -65,7 +66,7 @@ class Source(NodeBehaviorBase):
         if self.increase_payload:
             steps = math.floor(self.payload / 10)
             step_size = math.floor(self.quantity / steps)
-            return int(math.floor(self.log_id / step_size) * self.payload / steps)
+            return int((math.floor(self.log_id / step_size) + 1) * self.payload / steps)
         else:
             return self.payload
 

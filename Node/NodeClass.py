@@ -42,7 +42,7 @@ class NodeClass(multiprocessing.Process):
 
                 self._behaviors = behaviors
 
-                if sleep:
+                if sleep and len(self._behaviors):
                     time.sleep(sleep)  # Sleep to avoid busy waiting
 
         except KeyboardInterrupt:

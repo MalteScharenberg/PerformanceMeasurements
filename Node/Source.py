@@ -66,7 +66,11 @@ class Source(NodeBehaviorBase):
         if self.increase_payload:
             steps = math.floor(self.payload / 10)
             step_size = math.floor(self.quantity / steps)
-            return int((math.floor(self.log_id / step_size) + 1) * self.payload / steps)
+
+            # TODO: check this!
+            payload = int((math.floor(self.log_id / step_size) + 1) * self.payload / steps)
+
+            return payload if payload <= 100 else 100
         else:
             return self.payload
 

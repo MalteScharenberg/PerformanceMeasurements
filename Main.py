@@ -9,7 +9,7 @@ from Node.NodeClass import NodeClass
 from Evaluation.Evaluator import Evaluator
 from Evaluation.Delay import Delay
 from Evaluation.Throughput import Throughput
-from Helper.Printer import Printer
+from Helper.Logger import Logger
 from Helper.MatlabExporter import MatlabExporter
 from Hardware.HardwareMock import HardwareMock
 from Hardware.XBeeWrapper import XBeeWrapper
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # Init
     log_data_queue = multiprocessing.Queue()
     evaluator = Evaluator(log_data_queue)
-    printer = Printer()
+    printer = Logger()
     nodes = []
 
     # Parse config file

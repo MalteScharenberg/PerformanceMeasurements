@@ -3,7 +3,7 @@ __author__ = 'Malte-Christian Scharenberg'
 import sys
 
 
-class Printer():
+class Logger():
     def __init__(self):
         pass
 
@@ -24,7 +24,10 @@ class Printer():
             dimension = results[result_key]['dimension']
             output_data = ''
             for data in results[result_key]['data']:
-                output_data += '{0} {1}'.format(data, dimension)
+                if data is dict:
+                    output_data += '{0} {1} [{2}]'.format(data['data'], dimension, data['desc'])
+                else:
+                    output_data += '{0} {1}'.format(data, dimension)
                 output_data = output_data if short else output_data + '\n'
 
             output += (('' if short else '\n') + '{0}:' + ('' if short else '\n') + ' {1} ').format(result_key,

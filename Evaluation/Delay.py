@@ -54,7 +54,8 @@ class Delay(IEvaluatorBehavior):
                     print 'Key error: %s' % e.message
 
             if self.group_by:
-                desc = 'mean of {0} packets grouped by \'{1}\' = {2}'.format(received_packets, self.group_by, group_value)
+                desc = 'mean of {0} packets grouped by \'{1}\' = {2}'.format(received_packets, self.group_by,
+                                                                             group_value)
             else:
                 desc = 'mean of {0} packets'.format(received_packets)
 

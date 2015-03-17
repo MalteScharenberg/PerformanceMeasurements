@@ -23,7 +23,7 @@ class Sink(NodeBehaviorBase):
 
         self.last_received_time = received_time
 
-    def received_status(self, status):
+    def received_status(self, frame_id, status):
         pass
 
     def action(self):

@@ -8,9 +8,10 @@ __author__ = 'Malte-Christian Scharenberg'
 class Sink(NodeBehaviorBase):
     def __init__(self):
         self.last = False
+        self.last_received_time = time.time()
 
     def received_packet(self, packet):
-        status_time = time.time()
+        received_time = time.time()
         data = Sink.decode_sender_information(packet)
 
         if data['last']:
@@ -18,7 +19,9 @@ class Sink(NodeBehaviorBase):
 
         self.node.set_log_data(data['node_id'],
                                data['log_id'],
-                               {'received_time': status_time})
+                               {'received_time': received_time})
+
+        self.last_received_time = received_time
 
     def received_status(self, status):
         pass
@@ -26,7 +29,8 @@ class Sink(NodeBehaviorBase):
     def action(self):
         self.node.check_channel()
 
-        return not self.last
+        # Remove behavior if 'last' identifier in packet or if no packet was received for more than 10 seconds
+        return not (self.last or time.time() - self.last_received_time > 10)
 
     def get_max_sleep_time(self):
         return 1

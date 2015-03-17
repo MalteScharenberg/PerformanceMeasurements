@@ -62,7 +62,7 @@
       "hardware": {
         "type": "XBeeWrapper",
         "arguments": {
-          "port": "/dev/tty.usbserial-DA0121K0",
+          "port": "/dev/tty.usbserial-DA0121KA",
           "address": 11
         }
       }

@@ -24,7 +24,7 @@ class Logger():
             dimension = results[result_key]['dimension']
             output_data = ''
             for data in results[result_key]['data']:
-                if data is dict:
+                if type(data) is dict:
                     output_data += '{0} {1} [{2}]'.format(data['data'], dimension, data['desc'])
                 else:
                     output_data += '{0} {1}'.format(data, dimension)

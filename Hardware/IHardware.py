@@ -25,6 +25,12 @@ class IHardware:
         raise NotImplementedError("Should have implemented this")
 
     def check_channel(self):
+        """
+        This method get's invoked on a regular basis.
+        You can use this to handle incoming packets.
+        Ignore this method if you are working with callbacks.
+        (pass)
+        """
         raise NotImplementedError("Should have implemented this")
 
     def set_address(self, address):

@@ -84,9 +84,9 @@ class NodeClass(multiprocessing.Process):
     """
 
     def set_log_data(self, node_id, log_id, data):
-        self._log_data_queue.put({'node_id': int(node_id),
-                                  'log_id': int(log_id),
-                                  'data': data})
+        self._log_data_queue.put(dict(node_id=int(node_id),
+                                      log_id=int(log_id),
+                                      data=data))
 
     def check_channel(self):
         self._hardware_interface.check_channel()

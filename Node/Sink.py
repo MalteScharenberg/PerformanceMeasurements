@@ -12,8 +12,10 @@ class Sink(NodeBehaviorBase):
     def received_packet(self, packet):
         status_time = time.time()
         data = Sink.decode_sender_information(packet)
+
         if data['last']:
             self.last = True
+
         self.node.set_log_data(data['node_id'],
                                data['log_id'],
                                {'received_time': status_time})

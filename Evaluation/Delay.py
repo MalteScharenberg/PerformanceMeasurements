@@ -20,7 +20,9 @@ class Delay(IEvaluatorBehavior):
             return
 
         # Filter input data
-        node_data = filter(lambda date: 'received_time' in date,
+        node_data = filter(lambda date: 'received_time' in date
+                                        and (not self.group_by or (self.group_by in date)),
+                           # if 'group_by' is set, it should be a key in date
                            node_data)
 
         size = len(node_data)
@@ -29,6 +31,9 @@ class Delay(IEvaluatorBehavior):
 
         if start < 0:
             return
+
+        if self.group_by:
+            pass
 
         delay = []
         for n in range(start, end):
@@ -43,10 +48,15 @@ class Delay(IEvaluatorBehavior):
                 except KeyError, e:
                     print 'Key error: %s' % e.message
             try:
-                delay.append(delay_sum / received_packets)
+                delay.append(dict(data=delay_sum / received_packets,
+                                  desc=''))
             except KeyError, e:
                 print e, node_data, n
 
-        result = {'data': delay, 'dimension': 's'}
+        result = dict(data=delay,
+                      dimension='s')
 
         return result
+
+    def computation_callback(self, data):
+        pass

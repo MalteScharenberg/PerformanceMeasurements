@@ -48,8 +48,8 @@ class Source(NodeBehaviorBase):
 
             send_time = time.time()
             self.node.send_packet(frame_id, data, self.dest, self.ack)
-            self.node.set_log_data(self.node.get_id(), self.log_id, {'send_time': send_time,
-                                                                     'payload': len(data)})
+            self.node.set_log_data(self.node.get_id(), self.log_id, dict(send_time=send_time,
+                                                                         payload=len(data)))
             self.log_id += 1
             return True
         else:

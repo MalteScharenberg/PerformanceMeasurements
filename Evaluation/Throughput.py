@@ -44,6 +44,7 @@ class Throughput(IEvaluatorBehavior):
             except KeyError, e:
                 print e, node_data, n
 
-        result = {'data': throughput, 'dimension': 'kbits'}
+        result = dict(data=throughput,
+                      dimension='kbits')
 
         return result

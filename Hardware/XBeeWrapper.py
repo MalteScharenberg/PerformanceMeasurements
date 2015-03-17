@@ -4,10 +4,10 @@ import serial
 from xbee import XBee
 from xbee.helpers.dispatch import Dispatch
 
-from Hardware.HardwareBase import HardwareBase
+from Hardware.IHardware import IHardware
 
 
-class XBeeWrapper(HardwareBase):
+class XBeeWrapper(IHardware):
     def __init__(self, port, address=None):
         self._port = port
         self._address = address

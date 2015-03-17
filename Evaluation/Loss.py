@@ -1,10 +1,10 @@
 __author__ = 'Malte-Christian Scharenberg'
 
 import math
-from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
+from Evaluation.IEvaluatorBehavior import IEvaluatorBehavior
 
 
-class Loss(EvaluatorBehaviorBase):
+class Loss(IEvaluatorBehavior):
     def __init__(self, node_id):
         self.node_id = int(node_id)
 

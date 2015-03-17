@@ -3,10 +3,10 @@ __author__ = 'Malte-Christian Scharenberg'
 import time
 import random
 import multiprocessing
-from Hardware.HardwareBase import HardwareBase
+from Hardware.IHardware import IHardware
 
 
-class HardwareMock(HardwareBase):
+class HardwareMock(IHardware):
     channel = multiprocessing.Queue()
 
     def __init__(self, port):

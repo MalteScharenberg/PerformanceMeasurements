@@ -1,10 +1,10 @@
 __author__ = 'Malte-Christian Scharenberg'
 
 import math
-from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
+from Evaluation.IEvaluatorBehavior import IEvaluatorBehavior
 
 
-class Delay(EvaluatorBehaviorBase):
+class Delay(IEvaluatorBehavior):
     def __init__(self, node_id, block_size, group_by=False):
         self.node_id = int(node_id)
         self.block_size = block_size

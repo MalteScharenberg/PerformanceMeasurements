@@ -1,6 +1,6 @@
 __author__ = 'Malte-Christian Scharenberg'
 
-from Evaluation.EvaluatorBehaviorBase import EvaluatorBehaviorBase
+from Evaluation.IEvaluatorBehavior import IEvaluatorBehavior
 
 
 class Evaluator:
@@ -14,7 +14,7 @@ class Evaluator:
     """
 
     def add_behavior(self, behavior):
-        if isinstance(behavior, EvaluatorBehaviorBase):
+        if isinstance(behavior, IEvaluatorBehavior):
             self._behaviors.append(behavior)
         else:
             raise Exception('Wrong Interface.')

@@ -2,7 +2,7 @@ __author__ = 'Malte-Christian Scharenberg'
 
 import multiprocessing
 import time
-from Hardware.HardwareBase import HardwareBase
+from Hardware.IHardware import IHardware
 
 
 class NodeClass(multiprocessing.Process):
@@ -15,7 +15,7 @@ class NodeClass(multiprocessing.Process):
         self._behaviors = []
         self._log_data_queue = log_data_queue
 
-        assert isinstance(hardware_interface, HardwareBase)
+        assert isinstance(hardware_interface, IHardware)
         self._hardware_interface = hardware_interface
         self._hardware_interface.register_node(self)
 

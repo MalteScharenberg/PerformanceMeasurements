@@ -1,7 +1,7 @@
 __author__ = 'Malte-Christian Scharenberg'
 
 
-class EvaluatorBehaviorBase:
+class IEvaluatorBehavior:
     def __init__(self):
         pass
 

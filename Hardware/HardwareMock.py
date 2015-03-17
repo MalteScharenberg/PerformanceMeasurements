@@ -16,7 +16,7 @@ class HardwareMock(IHardware):
     def register_node(self, node):
         self.node = node
 
-    def send_packet(self, frame_id, packet, dest, ack=1):
+    def send_packet(self, frame_id, packet, dest, ack=True):
         # time.sleep(0.0025)
         HardwareMock.channel.put(packet)
 

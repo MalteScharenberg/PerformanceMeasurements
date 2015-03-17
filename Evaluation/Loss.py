@@ -24,6 +24,6 @@ class Loss(IEvaluatorBehavior):
         loss = len(node_data)
 
         result = dict(data=[loss],
-                      dimension='packets')
+                      dimension='packets (no ACK)')
 
         return result

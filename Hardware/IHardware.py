@@ -27,7 +27,7 @@ class IHardware:
         """
         raise NotImplementedError("Should have implemented this")
 
-    def send_packet(self, frame_id, packet, dest, ack=1):
+    def send_packet(self, frame_id, packet, dest, ack=True):
         raise NotImplementedError("Should have implemented this")
 
     def check_channel(self):

@@ -8,4 +8,6 @@ class MatlabExporter:
         self.file = export_file
 
     def export(self, results):
-        sio.savemat(self.file, {'results': results['Delay Node 1']['data']})
+        sio.savemat(self.file, dict(
+            results=results['Delay Node 1']['data']['data'] if type(results['Delay Node 1']['data']) is dict else
+            results['Delay Node 1']['data']))

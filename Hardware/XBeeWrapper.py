@@ -63,9 +63,14 @@ class XBeeWrapper(IHardware):
 
             self.node.received_packet(data)
 
-    def send_packet(self, frame_id, data, dest, ack=1):
+    def send_packet(self, frame_id, data, dest, ack=True):
         if self._xbee is not None:
-            self._xbee.tx(frame_id=chr(frame_id), dest_addr='\x00' + chr(dest), data=data, options=chr(ack))
+            if ack:
+                options = '\x00'
+            else:
+                options = '\x01'
+
+            self._xbee.tx(frame_id=chr(frame_id), dest_addr='\x00' + chr(dest), data=data, options=options)
 
     def check_channel(self):
         pass

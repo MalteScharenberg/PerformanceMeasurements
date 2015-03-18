@@ -37,7 +37,6 @@ class IHardware:
         Ignore this method if you are working with callbacks.
         (pass)
         """
-        raise NotImplementedError("Should have implemented this")
 
     def set_address(self, address):
         raise NotImplementedError("Should have implemented this")

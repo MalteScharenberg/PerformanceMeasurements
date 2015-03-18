@@ -13,7 +13,7 @@
       "matlab_export": true,
       "arguments": {
         "node_id": 1,
-        "block_size": 20,
+        "block_size": 200,
         "group_by": "payload"
       }
     },
@@ -34,7 +34,7 @@
         {
           "type": "Source",
           "arguments": {
-            "quantity": 200,
+            "quantity": 2000,
             "increase_payload": true,
             "payload": 100,
             "dest": 11,

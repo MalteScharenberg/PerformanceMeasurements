@@ -7,7 +7,7 @@ class Evaluator:
     def __init__(self, log_data_queue):
         self._log_data_queue = log_data_queue
         self._log_data = {}
-        self._behaviors = []
+        self._behaviorList = []
 
     """
     Adds behavior to evaluator (e.g. delay, throughput,...)
@@ -15,7 +15,7 @@ class Evaluator:
 
     def add_behavior(self, behavior):
         if isinstance(behavior, IEvaluatorBehavior):
-            self._behaviors.append(behavior)
+            self._behaviorList.append(behavior)
         else:
             raise Exception('Wrong Interface.')
 
@@ -57,7 +57,7 @@ class Evaluator:
     def get_results(self, short=False):
         raw_data = self.get_raw_data()
         result = {}
-        for behavior in self._behaviors:
+        for behavior in self._behaviorList:
             behavior_result = behavior.analyse(raw_data, short)
             if behavior_result:
                 result[behavior.get_name()] = behavior_result

@@ -12,7 +12,7 @@ class NodeClass(multiprocessing.Process):
         super(NodeClass, self).__init__()
         NodeClass.counter += 1
         self.id = NodeClass.counter
-        self._behaviors = []
+        self._behaviorList = []
         self._log_data_queue = log_data_queue
 
         assert isinstance(hardware_interface, IHardware)
@@ -27,22 +27,22 @@ class NodeClass(multiprocessing.Process):
             return  # Kill process
 
         try:
-            while len(self._behaviors) > 0:
+            while len(self._behaviorList) > 0:
                 # invoke action() on each behavior and remove behavior from list if action() returns 'false'
                 # self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
 
                 sleep = False
                 behaviors = []
-                for behavior in self._behaviors:
+                for behavior in self._behaviorList:
                     if behavior.action():  # remove behavior if return value is false
                         behaviors.append(behavior)
 
                     if sleep is False or behavior.get_max_sleep_time() < sleep:
                         sleep = float(behavior.get_max_sleep_time())
 
-                self._behaviors = behaviors
+                self._behaviorList = behaviors
 
-                if sleep and len(self._behaviors):
+                if sleep and len(self._behaviorList):
                     time.sleep(sleep)  # Sleep to avoid busy waiting
 
         except KeyboardInterrupt:
@@ -58,7 +58,7 @@ class NodeClass(multiprocessing.Process):
     def add_behavior(self, behavior):
         # assert isinstance(behavior, NodeBehaviorInterface)
         behavior.register_node(self)
-        self._behaviors.append(behavior)
+        self._behaviorList.append(behavior)
 
     """
     Should be invoked by behavior class
@@ -72,7 +72,7 @@ class NodeClass(multiprocessing.Process):
     """
 
     def received_packet(self, packet):
-        for behavior in self._behaviors:
+        for behavior in self._behaviorList:
             behavior.received_packet(packet)
 
     """
@@ -80,7 +80,7 @@ class NodeClass(multiprocessing.Process):
     """
 
     def received_status(self, frame_id, status):
-        for behavior in self._behaviors:
+        for behavior in self._behaviorList:
             behavior.received_status(frame_id, status)
 
     """

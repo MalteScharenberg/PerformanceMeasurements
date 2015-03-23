@@ -11,7 +11,7 @@ class Loss(IEvaluatorBehavior):
     def get_name(self):
         return self.__class__.__name__ + ' Node ' + str(self.node_id)
 
-    def analyse(self, data, short):
+    def analyze(self, data, short):
         try:
             node_data = data[self.node_id]
         except KeyError:

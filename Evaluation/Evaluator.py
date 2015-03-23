@@ -58,7 +58,7 @@ class Evaluator:
         raw_data = self.get_raw_data()
         result = {}
         for behavior in self._behaviorList:
-            behavior_result = behavior.analyse(raw_data, short)
+            behavior_result = behavior.analyze(raw_data, short)
             if behavior_result:
                 result[behavior.get_name()] = behavior_result
         return result

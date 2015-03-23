@@ -8,5 +8,5 @@ class IEvaluatorBehavior:
     def get_name(self):
         raise NotImplementedError("Should have implemented this")
 
-    def analyse(self, data, short):
+    def analyze(self, data, short):
         raise NotImplementedError("Should have implemented this")

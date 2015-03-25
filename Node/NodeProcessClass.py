@@ -5,13 +5,13 @@ import time
 from Hardware.IHardware import IHardware, HardwareException
 
 
-class NodeClass(multiprocessing.Process):
+class NodeProcessClass(multiprocessing.Process):
     counter = 0
 
     def __init__(self, log_data_queue, hardware_interface):
-        super(NodeClass, self).__init__()
-        NodeClass.counter += 1
-        self.id = NodeClass.counter
+        super(NodeProcessClass, self).__init__()
+        NodeProcessClass.counter += 1
+        self.id = NodeProcessClass.counter
         self._behaviorList = []
         self._log_data_queue = log_data_queue
 

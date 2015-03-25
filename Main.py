@@ -5,7 +5,7 @@ import time
 import json
 import sys
 
-from Node.NodeClass import NodeClass
+from Node.NodeProcessClass import NodeProcessClass
 from Evaluation.Evaluator import Evaluator
 from Evaluation.Delay import Delay
 from Evaluation.Throughput import Throughput
@@ -33,7 +33,7 @@ if __name__ == '__main__':
             evaluator.add_behavior(behavior)
         for node_config in config['nodes']:
             hardware = globals()[node_config['hardware']['type']](**node_config['hardware']['arguments'])
-            node = NodeClass(log_data_queue, hardware)
+            node = NodeProcessClass(log_data_queue, hardware)
             for behavior in node_config['behaviors']:
                 behavior = globals()[behavior['type']](**behavior['arguments'])
                 node.add_behavior(behavior)
@@ -45,10 +45,10 @@ if __name__ == '__main__':
         print 'Type Error in config file:', e
         sys.exit(1)
 
-    map(NodeClass.start, nodes)  # Start node processes
+    map(NodeProcessClass.start, nodes)  # Start node processes
 
     try:
-        while any(map(NodeClass.is_alive, nodes)):  # Check if nodes are still alive
+        while any(map(NodeProcessClass.is_alive, nodes)):  # Check if nodes are still alive
             results = evaluator.get_short_results()
             logger.print_short_results(results)  # output live results
             time.sleep(0.005)

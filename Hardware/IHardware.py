@@ -14,7 +14,7 @@ class IHardware:
 
     def run(self):
         """
-        This method get's invoked after process fork.
+        This method gets invoked after process fork.
         Serial Port association, etc, should be implemented here.
 
         :raises HardwareException:
@@ -23,7 +23,7 @@ class IHardware:
 
     def stop(self):
         """
-        This method get's invoked when process shuts down.
+        This method gets invoked when process shuts down.
         """
         raise NotImplementedError("Should have implemented this")
 
@@ -32,7 +32,7 @@ class IHardware:
 
     def check_channel(self):
         """
-        This method get's invoked on a regular basis.
+        This method gets invoked on a regular basis.
         You can use this to handle incoming packets.
         Ignore this method if you are working with callbacks.
         (pass)

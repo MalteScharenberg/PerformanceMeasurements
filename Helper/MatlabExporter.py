@@ -1,6 +1,7 @@
 __author__ = 'Malte-Christian Scharenberg'
 
 import scipy.io as sio
+import numpy
 
 
 class MatlabExporter:
@@ -8,6 +9,14 @@ class MatlabExporter:
         self.file = export_file
 
     def export(self, results):
-        results = map(lambda date: date['data'], results['Delay Node 1']['data'])
+        mean = []
+
+        for key, value in results.iteritems():
+            if 'Throughput' in key:
+                mean.append(numpy.mean(value['data']))
+
         sio.savemat(self.file, dict(
-            results=results))
+            results=numpy.mean(mean)))
+        # results = map(lambda date: date['data'], results['Delay Node 1']['data'])
+        # sio.savemat(self.file, dict(
+        # results=results))

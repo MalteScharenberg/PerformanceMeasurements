@@ -9,8 +9,7 @@ from Hardware.IHardware import IHardware
 class HardwareMock(IHardware):
     channel = multiprocessing.Queue()
 
-    def __init__(self, port):
-        self._port = port
+    def __init__(self):
         self.node = None
 
     def register_node(self, node):

@@ -39,7 +39,7 @@ class Throughput(IEvaluatorBehavior):
                     payload += node_data[i]['payload']
             try:
                 throughput.append(
-                    payload / (node_data[(n + 1) * self.block_size - 1]['status_time']
+                    8 * payload / (node_data[(n + 1) * self.block_size - 1]['status_time']
                                - node_data[n * self.block_size]['status_time']) / 1000)
             except KeyError, e:
                 print e, node_data, n

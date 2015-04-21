@@ -43,7 +43,7 @@ class Source(NodeBehaviorBase):
     def action(self):
         if self.log_id <= self.quantity:
 
-            if not self.check_speed():
+            if self.max_speed and not self.check_speed():
                 return True
 
             frame_id = self.register_frame_id(self.log_id)

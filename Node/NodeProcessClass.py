@@ -39,7 +39,6 @@ class NodeProcessClass(multiprocessing.Process):
             try:
                 while len(self._behaviorList) > 0:
                     # invoke action() on each behavior and remove behavior from list if action() returns 'false'
-                    # self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
 
                     sleep = False
                     behaviors = []

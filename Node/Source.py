@@ -32,9 +32,6 @@ class Source(NodeBehaviorBase):
         log_id = self.frame_ids[int(frame_id) - 1]
         self.frame_ids[int(frame_id) - 1] = None
 
-        # print len(filter(lambda id: id is not None, self.frame_ids))
-        # print "status"
-
         if log_id is None:
             print frame_id, 'not found'
             return
@@ -51,12 +48,8 @@ class Source(NodeBehaviorBase):
 
             frame_id = self.register_frame_id(self.log_id)
 
-            # print len(filter(lambda id: id is not None, self.frame_ids))
-            # print "action"
-
             if frame_id is False:  # Wait for frame_id
                 return True
-            # frame_id = 3
 
             last = self.log_id == self.quantity
 
@@ -88,8 +81,6 @@ class Source(NodeBehaviorBase):
         if self.increase_payload:
             steps = math.floor(self.payload / 10)
             step_size = math.floor(self.quantity / steps)
-
-            # TODO: check this!
             payload = int((math.floor(self.log_id / step_size) + 1) * self.payload / steps)
 
             return payload if payload <= 100 else 100
@@ -121,7 +112,5 @@ class Source(NodeBehaviorBase):
         if duration > 5:
             self.start_frame = time.time()
             self.payload_counter = 0
-
-        # print current_speed, self.payload_counter
 
         return current_speed < self.max_speed

@@ -10,16 +10,19 @@ __author__ = 'Malte-Christian Scharenberg'
 
 
 class Source(NodeBehaviorBase):
-    def __init__(self, quantity, payload, dest, ack=1, full_buffer=True, increase_payload=False):
+    def __init__(self, quantity, payload, dest, ack=1, full_buffer=True, max_speed=False, increase_payload=False):
         self.quantity = quantity
         self.increase_payload = increase_payload
         self.payload = payload
         self.dest = dest
         self.ack = ack
         self.full_buffer = full_buffer
+        self.max_speed = max_speed
         self.log_id = 0
         self.frame_ids = [None] * 255  # Preallocate list for frame id translation
         self.node = None
+        self.start_frame = time.time()
+        self.payload_counter = 0
 
     def received_packet(self, packet):
         pass
@@ -28,6 +31,10 @@ class Source(NodeBehaviorBase):
         status_time = time.time()
         log_id = self.frame_ids[int(frame_id) - 1]
         self.frame_ids[int(frame_id) - 1] = None
+
+        # print len(filter(lambda id: id is not None, self.frame_ids))
+        # print "status"
+
         if log_id is None:
             print frame_id, 'not found'
             return
@@ -38,13 +45,28 @@ class Source(NodeBehaviorBase):
 
     def action(self):
         if self.log_id <= self.quantity:
-            frame_id = self.register_frame_id(self.log_id)
-            if frame_id is False:  # Wait for frame_id
+
+            if not self.check_speed():
                 return True
 
+            frame_id = self.register_frame_id(self.log_id)
+
+            # print len(filter(lambda id: id is not None, self.frame_ids))
+            # print "action"
+
+            if frame_id is False:  # Wait for frame_id
+                return True
+            # frame_id = 3
+
             last = self.log_id == self.quantity
+
+            last = False  # do not shout down
+
             header = Source.encode_sender_information(self.node.get_id(), self.log_id, last)
             data = header + self.generate_data(self.get_payload() - len(header))
+
+            if self.max_speed:
+                self.payload_counter += len(data)
 
             send_time = time.time()
             self.node.send_packet(frame_id, data, self.dest, self.ack)
@@ -91,3 +113,15 @@ class Source(NodeBehaviorBase):
                 self.frame_ids[0] = new_log_id
 
         return new_frame_id
+
+    def check_speed(self):
+        duration = time.time() - self.start_frame
+        current_speed = (self.payload_counter + 100) / duration / 1000
+
+        if duration > 5:
+            self.start_frame = time.time()
+            self.payload_counter = 0
+
+        # print current_speed, self.payload_counter
+
+        return current_speed < self.max_speed

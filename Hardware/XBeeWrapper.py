@@ -61,7 +61,7 @@ class XBeeWrapper(IHardware):
         if self.node is not None:
 
             data = packet['rf_data']
-            src = packet['source_addr']
+            src = ord(packet['source_addr'])
 
             self.node.received_packet(src, data)
 

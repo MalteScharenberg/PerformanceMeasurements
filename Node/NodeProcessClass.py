@@ -5,6 +5,10 @@ import time
 from Hardware.IHardware import IHardware, HardwareException
 
 
+from pycallgraph import PyCallGraph
+from pycallgraph.output import GraphvizOutput
+
+
 class NodeProcessClass(multiprocessing.Process):
     counter = 0
 
@@ -20,36 +24,42 @@ class NodeProcessClass(multiprocessing.Process):
         self._hardware_interface.register_node(self)
 
     def run(self):
-        try:
-            self._hardware_interface.run()  # open serial port at child process (after fork)
-        except HardwareException, e:
-            print e
-            return  # Kill process
+        # # Profiling
+        # graphviz = GraphvizOutput()
+        # graphviz.output_file = 'process'+str(self.id)+'.png'
+        #
+        # with PyCallGraph(output=graphviz):
 
-        try:
-            while len(self._behaviorList) > 0:
-                # invoke action() on each behavior and remove behavior from list if action() returns 'false'
-                # self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
+            try:
+                self._hardware_interface.run()  # open serial port at child process (after fork)
+            except HardwareException, e:
+                print e
+                return  # Kill process
 
-                sleep = False
-                behaviors = []
-                for behavior in self._behaviorList:
-                    if behavior.action():  # remove behavior if return value is false
-                        behaviors.append(behavior)
+            try:
+                while len(self._behaviorList) > 0:
+                    # invoke action() on each behavior and remove behavior from list if action() returns 'false'
+                    # self._behaviors = [behavior for behavior in self._behaviors if behavior.action()]
 
-                    if sleep is False or behavior.get_max_sleep_time() < sleep:
-                        sleep = float(behavior.get_max_sleep_time())
+                    sleep = False
+                    behaviors = []
+                    for behavior in self._behaviorList:
+                        if behavior.action():  # remove behavior if return value is false
+                            behaviors.append(behavior)
 
-                self._behaviorList = behaviors
+                        if sleep is False or behavior.get_max_sleep_time() < sleep:
+                            sleep = float(behavior.get_max_sleep_time())
 
-                if sleep and len(self._behaviorList):
-                    time.sleep(sleep)  # Sleep to avoid busy waiting
+                    self._behaviorList = behaviors
 
-        except KeyboardInterrupt:
-            pass
+                    if sleep and len(self._behaviorList):
+                        time.sleep(sleep)  # Sleep to avoid busy waiting
 
-        print '\nShutting down node %d...' % self.get_id()
-        self._hardware_interface.stop()
+            except KeyboardInterrupt:
+                pass
+
+            print '\nShutting down node %d...' % self.get_id()
+            self._hardware_interface.stop()
 
     """
     Adds behavior to node (e.g. source, sink,...)

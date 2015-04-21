@@ -34,7 +34,7 @@ class XBeeWrapper(IHardware):
 
     def run(self):
         try:
-            self._serial = serial.Serial(self._port, 115000, stopbits=serial.STOPBITS_TWO, rtscts=1)
+            self._serial = serial.Serial(self._port, 115000, stopbits=serial.STOPBITS_TWO, rtscts=1, xonxoff=1)
             self._xbee = XBee(self._serial, callback=self._dispatcher.dispatch)
 
             # Set address

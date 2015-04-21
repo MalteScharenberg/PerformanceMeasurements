@@ -1,0 +1,67 @@
+{
+  "evaluator_behaviors": [
+    {
+      "type": "Throughput",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 1,
+        "block_size": 100
+      }
+    },
+    {
+      "type": "Delay",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 1,
+        "block_size": 200,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Loss",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 1
+      }
+    }
+  ],
+  "matlab_exporter": {
+    "file": "results.mat"
+  },
+  "nodes": [
+    {
+      "behaviors": [
+        {
+          "type": "Source",
+          "arguments": {
+            "quantity": 2000,
+            "increase_payload": false,
+            "payload": 100,
+            "dest": 11,
+            "ack": true,
+            "full_buffer": true
+          }
+        }
+      ],
+      "hardware": {
+        "type": "HardwareMock",
+        "arguments": {
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Sink",
+          "arguments": {
+          }
+        }
+      ],
+      "hardware": {
+        "type": "HardwareMock",
+        "arguments": {
+        }
+      }
+    }
+  ]
+}

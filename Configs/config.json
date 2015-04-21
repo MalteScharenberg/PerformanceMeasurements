@@ -1,0 +1,193 @@
+{
+  "evaluator_behaviors": [
+    {
+      "type": "Throughput",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 2,
+        "block_size": 200
+      }
+    },
+    {
+      "type": "ThroughputTime",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 2,
+        "time": 21,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Delay",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 2,
+        "block_size": 200,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Loss",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 2
+      }
+    },
+    {
+      "type": "Throughput",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 3,
+        "block_size": 200
+      }
+    },
+    {
+      "type": "ThroughputTime",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 3,
+        "time": 2,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Delay",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 3,
+        "block_size": 200,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Loss",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 3
+      }
+    },
+    {
+      "type": "Throughput",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 4,
+        "block_size": 200
+      }
+    },
+    {
+      "type": "ThroughputTime",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 4,
+        "time": 2,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Delay",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 4,
+        "block_size": 200,
+        "group_by": "payload"
+      }
+    },
+    {
+      "type": "Loss",
+      "matlab_export": true,
+      "arguments": {
+        "node_id": 4
+      }
+    }
+  ],
+  "matlab_exporter": {
+    "file": "results.mat"
+  },
+  "nodes": [
+    {
+      "behaviors": [
+        {
+          "type": "Sink",
+          "arguments": {
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA0121K0",
+          "address": 1
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Source",
+          "arguments": {
+            "quantity": 4000,
+            "increase_payload": false,
+            "payload": 100,
+            "dest": 1,
+            "ack": true,
+            "full_buffer": true,
+            "max_speed": 1
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA0121K1",
+          "address": 12
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Source",
+          "arguments": {
+            "quantity": 4000,
+            "increase_payload": false,
+            "payload": 100,
+            "dest": 1,
+            "ack": true,
+            "full_buffer": true,
+            "max_speed": 1
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA014346",
+          "address": 14
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Source",
+          "arguments": {
+            "quantity": 4000,
+            "increase_payload": false,
+            "payload": 100,
+            "dest": 1,
+            "ack": true,
+            "full_buffer": true,
+            "max_speed": 1
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA01434D",
+          "address": 15
+        }
+      }
+    }
+  ]
+}

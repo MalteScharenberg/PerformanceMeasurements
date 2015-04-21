@@ -19,7 +19,7 @@ class Ping(NodeBehaviorBase):
 
         frame_id = 1  # TODO: use frame id of incomming packet
 
-        self.node.send_packet(frame_id, data, self.src, True)
+        self.node.send_packet(frame_id, data, src, True)
 
     def received_status(self, frame_id, status):
         pass

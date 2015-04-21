@@ -10,15 +10,15 @@ class Sink(NodeBehaviorBase):
         self.last = False
         self.last_received_time = time.time()
 
-    def received_packet(self, packet):
+    def received_packet(self, src, data):
         received_time = time.time()
-        data = Sink.decode_sender_information(packet)
+        info = Sink.decode_sender_information(data)
 
-        if data['last']:
+        if info['last']:
             self.last = True
 
-        self.node.set_log_data(data['node_id'],
-                               data['log_id'],
+        self.node.set_log_data(info['node_id'],
+                               info['log_id'],
                                {'received_time': received_time})
 
         self.last_received_time = received_time

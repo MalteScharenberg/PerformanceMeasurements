@@ -59,9 +59,11 @@ class XBeeWrapper(IHardware):
 
     def rx_handler(self, name, packet):
         if self.node is not None:
-            data = packet['rf_data']
 
-            self.node.received_packet(data)
+            data = packet['rf_data']
+            src = packet['source_addr']
+
+            self.node.received_packet(src, data)
 
     def send_packet(self, frame_id, data, dest, ack=True):
         if self._xbee is not None:

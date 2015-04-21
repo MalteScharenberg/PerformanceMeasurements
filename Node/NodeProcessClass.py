@@ -5,8 +5,8 @@ import time
 from Hardware.IHardware import IHardware, HardwareException
 
 
-from pycallgraph import PyCallGraph
-from pycallgraph.output import GraphvizOutput
+# from pycallgraph import PyCallGraph
+# from pycallgraph.output import GraphvizOutput
 
 
 class NodeProcessClass(multiprocessing.Process):
@@ -80,9 +80,9 @@ class NodeProcessClass(multiprocessing.Process):
     Should be invoked by hardware interface
     """
 
-    def received_packet(self, packet):
+    def received_packet(self, src, packet):
         for behavior in self._behaviorList:
-            behavior.received_packet(packet)
+            behavior.received_packet(src, packet)
 
     """
     Should be invoked by hardware interface

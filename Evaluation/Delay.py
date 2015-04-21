@@ -20,7 +20,7 @@ class Delay(IEvaluatorBehavior):
             return
 
         # Filter input data
-        node_data = filter(lambda date: 'received_time' in date
+        node_data = filter(lambda date: 'status_time' in date
                                         and (not self.group_by or (self.group_by in date)),
                            # if 'group_by' is set, it should be a key in date
                            node_data)
@@ -48,7 +48,7 @@ class Delay(IEvaluatorBehavior):
                         if node_data[i][self.group_by] != group_value:
                             continue
 
-                    delay_sum += node_data[i]['received_time'] - node_data[i]['send_time']
+                    delay_sum += node_data[i]['status_time'] - node_data[i]['send_time']
                     received_packets += 1
                 except KeyError, e:
                     print 'Key error: %s' % e.message

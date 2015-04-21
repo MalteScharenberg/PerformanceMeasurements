@@ -9,7 +9,7 @@ class NodeBehaviorBase:
     def register_node(self, node):
         self.node = node
 
-    def received_packet(self, packet):
+    def received_packet(self, src, packet):
         raise NotImplementedError("Should have implemented this")
 
     def received_status(self, frame_id, status):

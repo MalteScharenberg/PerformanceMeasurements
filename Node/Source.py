@@ -24,7 +24,7 @@ class Source(NodeBehaviorBase):
         self.start_frame = time.time()
         self.payload_counter = 0
 
-    def received_packet(self, packet):
+    def received_packet(self, src, packet):
         pass
 
     def received_status(self, frame_id, status):

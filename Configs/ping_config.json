@@ -107,14 +107,30 @@
     {
       "behaviors": [
         {
+          "type": "Sink",
+          "arguments": {
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA0121K0",
+          "address": 1
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
           "type": "Source",
           "arguments": {
             "quantity": 4000,
             "increase_payload": false,
-            "payload": 50,
+            "payload": 100,
             "dest": 1,
             "ack": true,
-            "full_buffer": true
+            "full_buffer": false
           }
         }
       ],
@@ -123,6 +139,55 @@
         "arguments": {
           "port": "/dev/tty.usbserial-DA0121K1",
           "address": 12
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Source",
+          "arguments": {
+            "quantity": 4000,
+            "increase_payload": false,
+            "payload": 100,
+            "dest": 1,
+            "ack": true,
+            "full_buffer": false
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA014346",
+          "address": 14
+        }
+      }
+    },
+    {
+      "behaviors": [
+        {
+          "type": "Source",
+          "arguments": {
+            "quantity": 4000,
+            "increase_payload": false,
+            "payload": 100,
+            "dest": 1,
+            "ack": true,
+            "full_buffer": false
+          }
+        },
+        {
+          "type": "Sink",
+          "arguments": {
+          }
+        }
+      ],
+      "hardware": {
+        "type": "XBeeWrapper",
+        "arguments": {
+          "port": "/dev/tty.usbserial-DA01434D",
+          "address": 15
         }
       }
     }

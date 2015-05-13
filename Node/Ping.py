@@ -11,8 +11,6 @@ class Ping(NodeBehaviorBase):
     def __init__(self):
         self.last = False
         self.last_received_time = time.time()
-        self.source = Source()
-        self.sink = Sink()
 
     def received_packet(self, src, data):
         received_time = time.time()

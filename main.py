@@ -19,6 +19,7 @@ from Hardware.XBeeWrapper import XBeeWrapper
 from Node.Source import Source
 from Node.Sink import Sink
 from Node.Ping import Ping
+from Node.PingSource import PingSource
 
 # from pycallgraph import PyCallGraph
 # from pycallgraph.output import GraphvizOutput

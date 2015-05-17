@@ -4,7 +4,7 @@ import math
 from Evaluation.IEvaluatorBehavior import IEvaluatorBehavior
 
 
-class Loss(IEvaluatorBehavior):
+class CCA(IEvaluatorBehavior):
     def __init__(self, node_id):
         self.node_id = int(node_id)
 
@@ -19,11 +19,11 @@ class Loss(IEvaluatorBehavior):
 
         # Filter input data
         node_data = filter(lambda date: 'status' in date
-                                        and date['status'] == '\x01',
+                                        and date['status'] == '\x02',
                            node_data)
-        loss = len(node_data)
+        cca_failurs = len(node_data)
 
-        result = dict(data=[loss],
+        result = dict(data=[cca_failurs],
                       dimension='packets')
 
         return result

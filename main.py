@@ -12,6 +12,7 @@ from Evaluation.Delay import Delay
 from Evaluation.Throughput import Throughput
 from Evaluation.ThroughputTime import ThroughputTime
 from Evaluation.Loss import Loss
+from Evaluation.CCA import CCA
 from Helper.Logger import Logger
 from Helper.MatlabExporter import MatlabExporter
 from Hardware.HardwareMock import HardwareMock
